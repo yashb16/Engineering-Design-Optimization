@@ -15,10 +15,10 @@ x0 = [3 ; 4 ; 1];
 
 % x_min = powell_method(x0)
 
-% x_min = steep_descent(x0)
+x_min = steep_descent(x0)
 
 % x_min = fletcher_reeves(x0)
 
-x_min = bfgs(x0)
+% x_min = bfgs(x0)
 
 Fmin = objF(x_min)

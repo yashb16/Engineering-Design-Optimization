@@ -64,8 +64,9 @@ while true
     % checking the convergence criteria
     if (L(i)/L_init) <= Ex
         a_star = a_opt(i);
-%         figure
-%         plot(a_opt, f_opt, '*')
+        figure
+%         subplot(4,2,i)
+        plot(a_opt, f_opt, '*')
         break
     else
         i = i+1;

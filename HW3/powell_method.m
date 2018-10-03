@@ -25,6 +25,7 @@ for cycle = 1:2
    for j = 1:(S_len- 1)
       x_curr = x_temp
       search_dir = S(:,j)
+%       subplot(4,2,j)
       alpha_star = gold_section(x_temp, S(:,j))
 %       Alpha star calculated using the 1D search algorithm - Golden
 %       Section

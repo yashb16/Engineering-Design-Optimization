@@ -33,10 +33,10 @@ for cycle = 1:3
     
 %     Calculatinf D and E matrices
     D = ((Y.*transpose(Y))/(transpose(Y).*P))
-    E = ((C(:,cycle+1).*transpose(C(:,cycle+1)))/(transpose(C(:,cycle+1)).*S(:,cycle)))
+    E = eval((C(:,cycle+1).*transpose(C(:,cycle+1)))/(transpose(C(:,cycle+1)).*S(:,cycle)))
     
 %     Update H
-    H = eval(H + E + D)
+    H = (H + E + D)
     
     l = length(x);
     

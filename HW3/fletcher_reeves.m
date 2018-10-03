@@ -9,7 +9,7 @@ z = [z1 ; z2 ; z3];
 grad_f = gradient(objF(z));
 f(:,1) = subs(grad_f , z , x(:,1));
 
-S(:,1) = -1*f(:,1);
+S(:,1) = -1*f(:,1)
 
 alpha_star = gold_section(x(:,1) , S(:,1))
 
