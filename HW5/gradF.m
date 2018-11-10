@@ -1,5 +1,4 @@
-
-function fun = objF(x)
+function g = gradF(x)
 
 k1 = 5000;
 k2 = 1500;
@@ -18,5 +17,7 @@ x2 = x(2);
 x3 = x(3);
 
 fun = 0.5*(k1*x1^2 + k2*x2^2 + k3*x3^2 + k4*(x2-x1)^2 + k5*(x3-x1)^2 + k6*(x3-x2)^2 + (k7+k8)*x3^2) - P1*x1 - P2*x2 - P3*x3;
+
+g = gradient(fun);
 
 end

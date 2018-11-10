@@ -1,28 +1,30 @@
-function [a_left, a_right] = bounding_phase_algo(x0, S, a)
+function [a_left, a_right , m] = bounding_phase_algo(x0, S, a , m)
 
 x(:,1) = x0;
 
 alpha(1) = a;
 
-step_size = 0.001;
+step_size = 0.1;
 
 k = 1;
 
 del = abs(step_size);
 % delta is assigned the absolute value of step_size
-
+[m, f1] = objF(x(:,1) - del*S , m);
+[m, f2] = objF(x(:,1), m);
+[m, f3] = objF(x(:,1) + del*S , m);
 % Checking whether the function is increasing or decreasing
-if (objF(x(:,1) - del*S) >= objF(x(:,1))) && (objF(x(:,1)) >= objF(x(:,1) + del*S))
+if (f1 >= f2) && (f2 >= f3)
     disp('Step size is positive');
     step_size = del;
-elseif (objF(x(:,1) - del*S) <= objF(x(:,1))) && (objF(x(:,1)) <= objF(x(:,1) + del*S))
+elseif (f1 <= f2) && (f2 <= f3)
     disp('Step size is negative');
     step_size = -1*del;
 else
-    disp('Input smaller value of step_size');
-    disp( 'xleft =  x(1) - abs(step_size)');
+%     disp('Input smaller value of step_size');
+%     disp( 'xleft =  x(1) - abs(step_size)');
     a_left = a - del;
-    disp('xleft =  x(1) + abs(step_size)');
+%     disp('xleft =  x(1) + abs(step_size)');
     a_right = a + del;
     return
 end
@@ -36,8 +38,8 @@ while k > 0
     % Since the matrix indices start with 1 as compared to 0 that was taken in
     % class, 2 is raised to k-1 to compensate.
     
-    f_new = objF(x(:,k+1));
-    f_old = objF(x(:,k));
+    [m , f_new] = objF(x(:,k+1) , m);
+    [m, f_old] = objF(x(:,k) , m);
     
     if f_new <= f_old
         k = k + 1;

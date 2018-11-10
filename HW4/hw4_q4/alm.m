@@ -1,0 +1,56 @@
+function xmin = alm(x0)
+
+x(:,1) = x0;
+rp = 10;
+l(:,1) = zeros(15,1);
+% len = length(x0);
+% Ef = 0.0001;
+% Ep = 0.0001;
+
+% z = sym('z' , [1 len]);
+% z = z';
+
+
+
+for cycle = 1:6
+    
+    psi(1) = max(g1(x) , -l(1,cycle)/(2*rp));
+    psi(2) = max(g2(x) , -l(2,cycle)/(2*rp));
+    psi(3) = max(g3(x) , -l(3,cycle)/(2*rp));
+    psi(4) = max(g4(x) , -l(4,cycle)/(2*rp));
+    psi(5) = max(g5(x) , -l(5,cycle)/(2*rp));
+    psi(6) = max(g6(x) , -l(6,cycle)/(2*rp));
+    psi(7) = max(g7(x) , -l(7,cycle)/(2*rp));
+    psi(8) = max(g8(x) , -l(8,cycle)/(2*rp));
+    psi(9) = max(g9(x) , -l(9,cycle)/(2*rp));
+    psi(10) = max(g10(x) , -l(10,cycle)/(2*rp));
+    psi(11) = max(g11(x) , -l(11,cycle)/(2*rp));
+    psi(12) = max(g12(x) , -l(12,cycle)/(2*rp));
+    psi(13) = max(g13(x) , -l(13,cycle)/(2*rp));
+    psi(14) = max(g14(x) , -l(14,cycle)/(2*rp));
+    psi(15) = max(g15(x) , -l(15,cycle)/(2*rp));
+    
+    l(:,cycle)
+    
+    x(:,cycle+1) = bfgs(x(:,cycle) , l(:,cycle) , rp)
+    
+    for i = 1:15
+        l(i,cycle+1) = l(i,cycle) + 2*rp*psi(i);
+    end
+
+%     f1 = abs((objF(x(:,cycle+1)) - objF(x(:,cycle)))/objF(x(:,cycle)));
+%     f2 = abs((pseudoF(x(:,cycle+1) , rp) - pseudoF(x(:,cycle+1) , rp))/pseudoF(x(:,cycle+1) , rp));
+    
+%     if f1 < Ef && f2 < Ep
+%         L = length(x);
+%         break;
+%     end
+    
+%     rp = rp*10;
+    
+    L = length(x);
+end
+
+xmin = x(:,L-1);
+
+end
